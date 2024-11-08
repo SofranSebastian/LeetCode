@@ -29,3 +29,32 @@ It is guaranteed that the list represents a number that does not have leading ze
  */
 
 //---- SOLUTION ----//
+
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+  let listHead = new ListNode(0);
+  let currentNode = listHead;
+  let digit = 0;
+  while (l1 !== null || l2 !== null || digit > 0) {
+    const digitL1 = l1 ? l1.val : 0;
+    const digitL2 = l2 ? l2.val : 0;
+
+    const digitsSum = digitL1 + digitL2 + digit;
+    digit = Math.floor(digitsSum / 10);
+    currentNode.next = new ListNode(digitsSum % 10);
+    currentNode = currentNode.next;
+
+    if (l1) {
+      l1 = l1.next;
+    }
+    if (l2) {
+      l2 = l2.next;
+    }
+  }
+
+  return listHead.next;
+};
